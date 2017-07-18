@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "normalize-scss": "^7.0.0",
+    "purecss": "^1.0.0",
+    "typeplate-starter-kit": "^3.0.2"
+  }
+}

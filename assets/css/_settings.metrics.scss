@@ -1,0 +1,49 @@
+// Settings - Metrics
+// =================
+// This holds numbers for things like default margins, paddings, border-radius,
+// font-weights, etc.
+
+$border-radius: .25rem;
+
+$padding-small: .25rem;
+$padding-medium: .5rem;
+
+$margin-small: .25rem;
+$margin-medium: .5rem;
+
+$font-size-large: 1.5rem;
+$font-size-medium: 1.25rem;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+.category-list {
+  padding: 0;
+  margin-top: 0;
+
+  .category-list {
+    margin-left: 1rem;
+  }
+
+  > li {
+    list-style-type: none;
+  }
+
+  > li > h2 {
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    margin: 0;
+  }
+
+  > li > .category-list {
+    > li > h2 {
+      // Children of the top-level category list need a smaller h2 that isn't
+      // bold
+      font-size: $font-size-medium;
+      font-weight: $font-weight-normal;
+    }
+  }
+}
