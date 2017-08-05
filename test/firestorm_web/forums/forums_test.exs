@@ -6,8 +6,12 @@ defmodule FirestormWeb.ForumsTest do
   describe "users" do
     alias FirestormWeb.Forums.User
 
-    @valid_attrs %{email: "some email", name: "some name", username: "some username"}
-    @update_attrs %{email: "some updated email", name: "some updated name", username: "some updated username"}
+    @valid_attrs %{email: "some email",
+                   name: "some name",
+                   username: "some username"}
+    @update_attrs %{email: "some updated email",
+                    name: "some updated name",
+                    username: "some updated username"}
     @invalid_attrs %{email: nil, name: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -51,7 +55,8 @@ defmodule FirestormWeb.ForumsTest do
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
-      assert {:error, %Ecto.Changeset{}} = Forums.update_user(user, @invalid_attrs)
+      result = Forums.update_user(user, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = result
       assert user == Forums.get_user!(user.id)
     end
 
@@ -94,12 +99,14 @@ defmodule FirestormWeb.ForumsTest do
     end
 
     test "create_category/1 with valid data creates a category" do
-      assert {:ok, %Category{} = category} = Forums.create_category(@valid_attrs)
+      result = Forums.create_category(@valid_attrs)
+      assert {:ok, %Category{} = category} = result
       assert category.title == "some title"
     end
 
     test "create_category/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Forums.create_category(@invalid_attrs)
+      result = Forums.create_category(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = result
     end
 
     test "update_category/2 with valid data updates the category" do
@@ -111,14 +118,16 @@ defmodule FirestormWeb.ForumsTest do
 
     test "update_category/2 with invalid data returns error changeset" do
       category = category_fixture()
-      assert {:error, %Ecto.Changeset{}} = Forums.update_category(category, @invalid_attrs)
+      result = Forums.update_category(category, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = result
       assert category == Forums.get_category!(category.id)
     end
 
     test "delete_category/1 deletes the category" do
       category = category_fixture()
       assert {:ok, %Category{}} = Forums.delete_category(category)
-      assert_raise Ecto.NoResultsError, fn -> Forums.get_category!(category.id) end
+      assert_raise Ecto.NoResultsError,
+                   fn -> Forums.get_category!(category.id) end
     end
 
     test "change_category/1 returns a category changeset" do
@@ -154,12 +163,14 @@ defmodule FirestormWeb.ForumsTest do
       assert Forums.list_threads() == [thread]
     end
 
-    test "get_thread!/1 returns the thread with given id", %{category: category} do
+    test "get_thread!/1 returns the thread with given id",
+         %{category: category} do
       thread = thread_fixture(category)
       assert Forums.get_thread!(thread.id) == thread
     end
 
-    test "create_thread/1 with valid data creates a thread", %{category: category} do
+    test "create_thread/1 with valid data creates a thread",
+         %{category: category} do
       attrs = @valid_attrs |> Map.put(:category_id, category.id)
       assert {:ok, %Thread{} = thread} = Forums.create_thread(attrs)
       assert thread.title == "some title"
@@ -169,16 +180,19 @@ defmodule FirestormWeb.ForumsTest do
       assert {:error, %Ecto.Changeset{}} = Forums.create_thread(@invalid_attrs)
     end
 
-    test "update_thread/2 with valid data updates the thread", %{category: category} do
+    test "update_thread/2 with valid data updates the thread",
+         %{category: category} do
       thread = thread_fixture(category)
       assert {:ok, thread} = Forums.update_thread(thread, @update_attrs)
       assert %Thread{} = thread
       assert thread.title == "some updated title"
     end
 
-    test "update_thread/2 with invalid data returns error changeset", %{category: category} do
+    test "update_thread/2 with invalid data returns error changeset",
+         %{category: category} do
       thread = thread_fixture(category)
-      assert {:error, %Ecto.Changeset{}} = Forums.update_thread(thread, @invalid_attrs)
+      result = Forums.update_thread(thread, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = result
       assert thread == Forums.get_thread!(thread.id)
     end
 
